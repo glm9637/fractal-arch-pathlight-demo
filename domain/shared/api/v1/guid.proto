@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package pathlight.shared.api.v1;
+
+
+// UUID is a message that represents a universally unique identifier (UUID) in the system.
+message UUID {
+  string value = 1;
+}

@@ -1,0 +1,20 @@
+[package]
+name = "pathlight"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = { workspace = true }
+figment = { workspace = true }
+serde = { workspace = true }
+tokio = { workspace = true }
+tonic = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+sqlx = { workspace = true }
+todo-backend = { workspace = true }
+todo-api-server = { workspace = true }
+todo-api-client = { workspace = true }
+
+[lints]
+workspace = true

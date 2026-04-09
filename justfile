@@ -1,0 +1,4 @@
+mod db "./scripts/db.just"
+mod generate "./scripts/generate.just"
+mod setup "./scripts/setup.just"
+mod start "./scripts/start.just"

@@ -1,0 +1,12 @@
+[package]
+name = "state_machine"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { workspace = true }
+anyhow = { workspace = true }
+flutter_rust_bridge = { workspace = true }
+
+[lints]
+workspace = true

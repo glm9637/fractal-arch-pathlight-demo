@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pathlight.todo.api.v1.request;
+
+import "domain/shared/api/v1/pagination.proto";
+
+// A message that contains the request parameters for getting a list of todo items.
+message GetTodoListRequest {
+  pathlight.shared.api.v1.PaginationData pagination = 1;
+}
+
+// A message for creating a new Todo Entry
+message AddTodoEntryRequest {
+  string title     = 1;
+  bool   completed = 2;
+}

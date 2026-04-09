@@ -1,0 +1,26 @@
+name: todo_frontend
+description: A starting point for Dart libraries or applications.
+version: 1.0.0
+publish_to: 'none'
+
+resolution: workspace
+environment:
+  sdk: ^3.11.4
+  flutter: '>=3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_rust:
+    path: ../../../domain/shared/flutter_rust
+  state_machine_flutter:
+    path: ../../../domain/shared/state_machine/flutter
+  flutter_rust_bridge: 2.12.0
+  freezed_annotation: ^3.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  freezed: ^3.2.5
+  build_runner: ^2.13.1

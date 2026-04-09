@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Pathlight (Debug)",
+            "request": "launch",
+            "type": "dart",
+            "program": "${workspaceFolder}/app/client/pathlight/lib/main.dart",
+            "cwd": "${workspaceFolder}/app/client/pathlight",
+            "flutterMode": "debug"
+        },
+        {
+            "name": "Launch Pathlight (Profile)",
+            "request": "launch",
+            "type": "dart",
+            "program": "${workspaceFolder}/app/client/pathlight/lib/main.dart",
+            "cwd": "${workspaceFolder}/app/client/pathlight",
+            "flutterMode": "profile"
+        }
+    ]
+}

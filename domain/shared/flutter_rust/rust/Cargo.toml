@@ -1,0 +1,17 @@
+[package]
+name = "rust_lib_flutter_rust"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib", "staticlib"]
+
+[dependencies]
+flutter_rust_bridge = { workspace = true }
+todo_frontend_core = { workspace = true }
+anyhow = { workspace = true }
+state_machine = { workspace = true }
+walkdir = { workspace = true }
+syn = { workspace = true }
+quote = { workspace = true }
+env_logger = { workspace = true }

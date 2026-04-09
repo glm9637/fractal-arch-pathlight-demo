@@ -1,0 +1,23 @@
+
+[package]
+name = "todo-backend"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Inherit from workspace
+tokio = { workspace = true }
+tonic = { workspace = true }
+prost = { workspace = true }
+tonic-web = { workspace = true }
+serde = { workspace = true }
+tracing = { workspace = true }
+rust-utils = { workspace = true }
+shared-models = { workspace = true }
+todo-api-server = { workspace = true }
+anyhow = { workspace = true }
+sqlx = { workspace = true }
+uuid = { workspace = true }
+
+[lints]
+workspace = true

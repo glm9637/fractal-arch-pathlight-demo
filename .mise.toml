@@ -1,0 +1,22 @@
+# /.mise.toml
+[tools]
+rust = "1.94.1"
+flutter = "3.41.6"
+
+just = "1.48.1"
+lefthook = '2.1.4'
+
+protobuf = '3.15.5'
+protolint = '0.56.4'
+
+"cargo:protoc-gen-prost" = "0.5.0"
+"cargo:protoc-gen-tonic" = "0.5.0"
+"cargo:sqlx-cli" = "0.8.0"
+
+cmake = '4.3.1'
+ninja = '1.11.1'
+
+"cargo:flutter_rust_bridge_codegen" = "2.12.0"
+
+[env]
+_.path = ["{{env.HOME}}/.pub-cache/bin"]

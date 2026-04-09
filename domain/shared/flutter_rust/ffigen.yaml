@@ -1,0 +1,15 @@
+# Run with `dart run ffigen --config ffigen.yaml`.
+name: FlutterRustBindings
+description: |
+  Bindings for `src/flutter_rust.h`.
+
+  Regenerate bindings with `dart run ffigen --config ffigen.yaml`.
+output: 'lib/flutter_rust_bindings_generated.dart'
+headers:
+  entry-points:
+    - 'src/flutter_rust.h'
+  include-directives:
+    - 'src/flutter_rust.h'
+comments:
+  style: any
+  length: full

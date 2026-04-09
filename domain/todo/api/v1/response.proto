@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package pathlight.todo.api.v1.response;
+import "domain/shared/api/v1/guid.proto";
+
+// GetTodoListRequest is a message that contains the request parameters for getting a list of todo items.
+message GetTodoListResponse {
+  message TodoEntry {
+    pathlight.shared.api.v1.UUID id        = 1;
+    string                       title     = 2;
+    bool                         completed = 3;
+  }
+
+  repeated TodoEntry items = 1;
+}
+
+// The response with a newly created TodoEntry
+message AddTodoEntryResponse {
+  pathlight.shared.api.v1.UUID id        = 1;
+  string                       title     = 2;
+  bool                         completed = 3;
+
+}

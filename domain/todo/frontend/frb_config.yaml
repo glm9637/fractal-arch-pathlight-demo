@@ -1,0 +1,4 @@
+rust_input: crate::api
+rust_root: core/
+dart_output: lib/src/bridge
+dart_entrypoint_class_name: "TodoRustLib"

@@ -1,0 +1,6 @@
+{
+    "protobuf.externalLinter.enabled": true,
+    "protobuf.externalLinter.linter": "protolint",
+    "protobuf.externalLinter.protolintPath": "protolint",
+    "dart.projectSearchDepth": 10,
+}

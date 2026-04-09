@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "hverlin.mise-vscode",
+        "dart-code.flutter",
+        "rust-lang.rust-analyzer",
+        "fill-labs.dependi",
+        "tamasfe.even-better-toml",
+        "christian-kohler.path-intellisense"
+    ]
+}

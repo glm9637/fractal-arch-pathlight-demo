@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package pathlight.todo.api.v1.service;
+
+import "domain/todo/api/v1/request.proto";
+import "domain/todo/api/v1/response.proto";
+
+// TodoService is a gRPC service that defines the API endpoints for managing todo items.
+service TodoService {
+  // GetTodoList is a gRPC method that retrieves a list of todo items based on the provided request parameters.
+  rpc GetTodoList(pathlight.todo.api.v1.request.GetTodoListRequest) returns (pathlight.todo.api.v1.response.GetTodoListResponse);
+  // Method for creating a new Todo Entry
+  rpc AddTodoEntry(pathlight.todo.api.v1.request.AddTodoEntryRequest) returns (pathlight.todo.api.v1.response.AddTodoEntryResponse);
+}

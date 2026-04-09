@@ -1,0 +1,10 @@
+name: pathlight
+
+packages:
+  - "domain/*/frontend"
+  - "app/frontend/*"
+  - "shared/flutter/*"
+
+  command:
+  bootstrap:
+    intellij: false

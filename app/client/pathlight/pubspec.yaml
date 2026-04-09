@@ -1,0 +1,27 @@
+name: pathlight
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  freezed_annotation: ^3.1.0
+  todo_frontend:
+    path: ../../../domain/todo/frontend
+  flutter_rust:
+    path: ../../../domain/shared/flutter_rust
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  freezed: ^3.2.5
+  build_runner: ^2.13.1
+
+
+flutter:
+  uses-material-design: true

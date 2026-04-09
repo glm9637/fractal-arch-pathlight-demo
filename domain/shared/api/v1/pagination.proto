@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package pathlight.shared.api.v1;
+
+
+
+// PaginationData is a message that contains pagination information for API requests.
+message PaginationData {
+    int32 page_number = 1;
+    int32 page_size = 2;
+}

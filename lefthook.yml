@@ -1,0 +1,10 @@
+# /lefthook.yml
+post-merge:
+  commands:
+    sync:
+      run: just _sync_env
+
+post-checkout:
+  commands:
+    sync:
+      run: just _sync_env
