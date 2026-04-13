@@ -3,15 +3,11 @@ use crate::{
     domain::{TodoEngine, TodoResources, TodoState},
 };
 use once_cell::sync::Lazy;
+#[cfg(not(target_family = "wasm"))]
+use state_machine::network::RUNTIME;
+use state_machine::network::{UniversalChannel, create_channel};
 use std::sync::{Arc, RwLock};
-use todo_api_client::{
-    tonic::{self, transport::Channel},
-    v1::service::todo_service_client::TodoServiceClient,
-};
-use tokio::runtime::Runtime;
-
-pub static RUNTIME: Lazy<Runtime> =
-    Lazy::new(|| Runtime::new().expect("Failed to create Tokio runtime for Pathlight"));
+use todo_api_client::v1::service::todo_service_client::TodoServiceClient;
 
 pub static TODO_ENGINE: Lazy<RwLock<Option<Arc<TodoEngine>>>> = Lazy::new(|| RwLock::new(None));
 
@@ -40,11 +36,11 @@ pub fn dispose_engine() -> anyhow::Result<()> {
     return Ok(());
 }
 
-fn init_client(config: TodoSystemConfig) -> anyhow::Result<(TodoServiceClient<Channel>)> {
+fn init_client(config: TodoSystemConfig) -> anyhow::Result<TodoServiceClient<UniversalChannel>> {
+    #[cfg(not(target_family = "wasm"))]
     let _guard = RUNTIME.enter();
 
-    let endpoint = tonic::transport::Endpoint::from_shared(config.base_url)?;
-    let channel = endpoint.connect_lazy();
+    let channel = create_channel(config.base_url)?;
     let client = TodoServiceClient::new(channel);
     return Ok(client);
 }

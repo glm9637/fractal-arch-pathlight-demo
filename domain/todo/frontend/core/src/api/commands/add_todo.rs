@@ -1,4 +1,4 @@
-use state_machine::command::Command;
+use state_machine::{command::Command, network::UniversalChannel};
 use todo_api_client::{
     tonic,
     v1::{request::AddTodoEntryRequest, service::todo_service_client::TodoServiceClient},
@@ -33,7 +33,7 @@ impl Command<TodoDomain> for AddTodoCommand {
 impl AddTodoCommand {
     async fn persist_entry(
         &self,
-        mut client: TodoServiceClient<tonic::transport::Channel>,
+        mut client: TodoServiceClient<UniversalChannel>,
     ) -> anyhow::Result<String> {
         let request = tonic::Request::new(AddTodoEntryRequest {
             title: self.text.clone(),

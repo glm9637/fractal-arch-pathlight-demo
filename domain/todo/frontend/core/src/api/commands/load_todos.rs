@@ -1,4 +1,4 @@
-use state_machine::command::Command;
+use state_machine::{command::Command, network::UniversalChannel};
 use todo_api_client::{
     tonic,
     v1::{request::GetTodoListRequest, service::todo_service_client::TodoServiceClient},
@@ -35,7 +35,7 @@ impl Command<TodoDomain> for LoadTodosCommand {
 
 impl LoadTodosCommand {
     async fn fetch_todos_from_network(
-        mut client: TodoServiceClient<tonic::transport::Channel>,
+        mut client: TodoServiceClient<UniversalChannel>,
     ) -> anyhow::Result<Vec<String>> {
         let request = tonic::Request::new(GetTodoListRequest { pagination: None });
 

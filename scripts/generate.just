@@ -43,7 +43,7 @@ proto:
                 protoc -I="$PROJECT_ROOT" \
                     --prost_out="$CLIENT_OUT" \
                     --prost_opt="extern_path=.pathlight.shared.api.v1=::shared_models::v1" \
-                    --tonic_out="no_server=true:$CLIENT_OUT" \
+                    --tonic_out="no_server=true,no_transport=true:$CLIENT_OUT" \
                     $PROTOS
 
                 protoc -I="$PROJECT_ROOT" \

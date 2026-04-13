@@ -4,12 +4,10 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-# It relies on the raw network client
 todo-api-client = { workspace = true }
 shared-models = { workspace = true }
 state_machine = { workspace = true }
 anyhow = { workspace = true }
-tokio = { workspace = true }
 flutter_rust_bridge = { workspace = true }
 env_logger = { workspace = true }
 once_cell = { workspace = true }

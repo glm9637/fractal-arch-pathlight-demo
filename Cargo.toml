@@ -1,9 +1,6 @@
-
-
 [workspace]
 resolver = "2"
 
-# Glob patterns to find your backend crates
 members = [
     "app/server/pathlight", 
     "domain/*/backend",
@@ -18,8 +15,11 @@ members = [
 
 # Centralized dependencies for the entire monorepo
 [workspace.dependencies]
-tokio = { version = "1.51.1", features = ["full"] }
-tonic = { version = "0.14.5" }
+tokio = { version = "1.51.1", default-features = false, features = ["sync", "macros"] }
+tonic = { version = "0.14.5", default-features = false,features = ["codegen"] }
+tower-http = { version = "0.6.8", features = ["cors"] }
+http = "1.4.0"
+tonic-web-wasm-client = "0.9.1"
 prost = { version = "0.14.3" }
 tonic-prost = "0.14.5"
 tonic-web = { version = "0.14.5" }
@@ -52,7 +52,6 @@ flutter_rust = { path = "domain/shared/flutter_rust" }
 state_machine = { path = "domain/shared/state_machine/rust" }
 
 [workspace.lints.rust]
-# Prevent unsafe code completely unless strictly necessary (forces you to opt-in)
 unsafe_code = "deny"
 # Warn on unused variables, imports, etc.
 rust_2018_idioms = { level = "warn", priority = -1 }
