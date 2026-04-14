@@ -3,7 +3,7 @@ use rust_utils::pagination::SqlPagination;
 use crate::get_todo_list::model::TodoRecord;
 
 pub async fn get_todo_list(
-    db_pool: &sqlx::SqlitePool,
+    db_pool: &sqlx::PgPool,
     pagination: &SqlPagination,
 ) -> anyhow::Result<Vec<TodoRecord>> {
     let rows = sqlx::query_as!(
@@ -15,7 +15,7 @@ pub async fn get_todo_list(
         is_completed 
         FROM todos
         ORDER BY created_at DESC
-        LIMIT ? OFFSET ?
+        LIMIT $1 OFFSET $2
         "#,
         pagination.limit,
         pagination.offset

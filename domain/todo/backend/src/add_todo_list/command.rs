@@ -1,7 +1,7 @@
 use todo_api_server::v1::{request::AddTodoEntryRequest, response::AddTodoEntryResponse};
 
 pub async fn add_todo_entry(
-    db_pool: &sqlx::SqlitePool,
+    db_pool: &sqlx::PgPool,
     data: &AddTodoEntryRequest,
 ) -> anyhow::Result<AddTodoEntryResponse> {
     let result = super::query::add_todo_entry(db_pool, data).await?;

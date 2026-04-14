@@ -1,0 +1,8 @@
+# infra/caddy/Caddyfile
+:8080 {
+    # Route login traffic to the Next.js container
+    reverse_proxy /ui/v2/login* login:3000
+    
+    # Route everything else to the Go API
+    reverse_proxy * zitadel:8080
+}

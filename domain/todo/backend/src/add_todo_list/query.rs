@@ -3,7 +3,7 @@ use todo_api_server::v1::request::AddTodoEntryRequest;
 use crate::add_todo_list::model::TodoRecord;
 
 pub async fn add_todo_entry(
-    db_pool: &sqlx::SqlitePool,
+    db_pool: &sqlx::PgPool,
     entry: &AddTodoEntryRequest,
 ) -> anyhow::Result<TodoRecord> {
     let id = uuid::Uuid::new_v4();
@@ -13,7 +13,7 @@ pub async fn add_todo_entry(
         INSERT INTO todos
             (id, title, is_completed)
         VALUES
-            (?,?,?)
+            ($1,$2,$3)
         RETURNING
             id as "id: _",
             title,

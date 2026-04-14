@@ -21,17 +21,13 @@ async fn main() -> anyhow::Result<()> {
     tracing::info!("Starting gRPC server on {}", server_addr);
 
     let cors = CorsLayer::new()
-        // Allow the specific origin of your Flutter app
-        .allow_origin("http://localhost:8080".parse::<HeaderValue>()?)
-        // Standard gRPC-Web methods
+        .allow_origin(config.website.url.parse::<HeaderValue>()?)
         .allow_methods([Method::POST, Method::OPTIONS])
-        // Standard gRPC-Web headers
         .allow_headers([
             "content-type".parse()?,
             "x-grpc-web".parse()?,
             "x-user-agent".parse()?,
         ])
-        // CRITICAL: Allow the browser to see these headers in the response
         .expose_headers(["grpc-status".parse()?, "grpc-message".parse()?]);
 
     Server::builder()

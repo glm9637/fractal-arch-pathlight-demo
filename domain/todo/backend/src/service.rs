@@ -8,7 +8,7 @@ use tonic::{Request, Response, Status};
 
 #[derive(Debug)]
 pub struct ToDoBackendServiceImpl {
-    pub sqlite_pool: sqlx::SqlitePool,
+    pub sqlite_pool: sqlx::PgPool,
 }
 
 #[tonic::async_trait]

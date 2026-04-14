@@ -16,9 +16,15 @@ pub struct DatabaseConfig {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+pub struct WebsiteConfig {
+    pub url: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
     pub server: ServerConfig,
     pub database: DatabaseConfig,
+    pub website: WebsiteConfig,
 }
 
 impl Config {
