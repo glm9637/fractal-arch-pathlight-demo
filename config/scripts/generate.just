@@ -1,7 +1,7 @@
 frb:
     @echo "Generating Bridges..."
     MONOREPO_ROOT="{{ justfile_dir() }}" cargo run --bin generate
-    cd ../domain/shared/flutter_rust && flutter_rust_bridge_codegen generate --config-file frb_config.yaml
+    cd {{ justfile_dir() }}/domain/shared/flutter_rust && flutter_rust_bridge_codegen generate --config-file frb_config.yaml
 
 proto:
     #!/usr/bin/env bash

@@ -7,7 +7,7 @@ backend:
 # Start the Flutter Shell App
 frontend:
     @echo "Launching the Flutter app..."
-    cd ../app/client/pathlight && flutter run
+    cd {{ justfile_dir() }}/app/client/pathlight && flutter run
 
 # Start the Flutter Shell App
 web:
@@ -23,8 +23,8 @@ web:
 
 infra:
     #!/usr/bin/env bash
-    set -a; source ../.env; set +a; \
-    podman compose --env-file ../infra/.env --file ../infra/docker-compose.yml up -d
+    set -a; source {{ justfile_dir() }}/.env; set +a; \
+    podman compose --env-file {{ justfile_dir() }}/config/infra/.env --file {{ justfile_dir() }}/config/infra/docker-compose.yml up -d
 
 migrations:
-    sqlx migrate run --source ../domain/todo/db
+    sqlx migrate run --source {{ justfile_dir() }}/domain/todo/db
