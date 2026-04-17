@@ -24,6 +24,7 @@ pub struct WebsiteConfig {
 pub struct Config {
     pub server: ServerConfig,
     pub database: DatabaseConfig,
+    pub admin_db: DatabaseConfig,
     pub website: WebsiteConfig,
 }
 

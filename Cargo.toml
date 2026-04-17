@@ -4,13 +4,14 @@ resolver = "2"
 members = [
     "app/server/pathlight", 
     "domain/*/backend",
-    "domain/shared/api/generated/models",
+    "domain/*/frontend/core",
     "domain/*/api/generated/client",
     "domain/*/api/generated/server",
-    "domain/shared/rust_utils",
-    "domain/todo/frontend/core",
-    "domain/shared/state_machine/rust",
+    "domain/shared/api/generated/models",
     "domain/shared/flutter_rust/rust",
+    "domain/shared/rust_utils",
+    "domain/shared/state_machine/rust",
+    "test/rust",
 ]
 
 # Centralized dependencies for the entire monorepo
@@ -39,6 +40,7 @@ syn = {version ="2.0", features = ["full", "extra-traits"]}
 quote = "1.0"
 env_logger = "0.11"
 once_cell = "1.19"
+regex="1.12.3"
 
 # workspace crates
 rust-utils = { path = "domain/shared/rust_utils" }
@@ -47,7 +49,8 @@ todo-api-client = { path = "domain/todo/api/generated/client" }
 todo-api-server = { path = "domain/todo/api/generated/server" }
 todo-backend = { path = "domain/todo/backend" }
 todo_frontend_core = { path = "domain/todo/frontend/core" }
-
+auth-backend ={ path = "domain/auth/backend"}
+auth_frontend_core ={ path = "domain/auth/frontend/core" }
 flutter_rust = { path = "domain/shared/flutter_rust" }
 state_machine = { path = "domain/shared/state_machine/rust" }
 

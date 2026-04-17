@@ -11,6 +11,7 @@ anyhow = { workspace = true }
 flutter_rust_bridge = { workspace = true }
 env_logger = { workspace = true }
 once_cell = { workspace = true }
+auth_frontend_core = {workspace = true}
 
 [lints]
 workspace = true

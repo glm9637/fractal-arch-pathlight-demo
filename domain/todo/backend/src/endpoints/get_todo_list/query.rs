@@ -1,6 +1,6 @@
 use rust_utils::pagination::SqlPagination;
 
-use crate::get_todo_list::model::TodoRecord;
+use super::model::TodoRecord;
 
 pub async fn get_todo_list(
     db_pool: &sqlx::PgPool,
@@ -10,7 +10,7 @@ pub async fn get_todo_list(
         TodoRecord,
         r#"
     SELECT 
-        id as "id: _",
+        id,
         title, 
         is_completed 
         FROM todos

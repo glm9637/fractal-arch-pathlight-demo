@@ -1,2 +1,4 @@
 target/**
 .dart_tool/
+.pup/
+build/

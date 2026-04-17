@@ -1,7 +1,7 @@
 use http::{HeaderValue, Method};
 use tonic::transport::Server;
 use tonic_web::GrpcWebLayer;
-use tower_http::cors::CorsLayer;
+use tower_http::cors::{AllowHeaders, CorsLayer};
 use tracing_subscriber::EnvFilter;
 mod config;
 mod db;
@@ -15,7 +15,7 @@ async fn main() -> anyhow::Result<()> {
         .init();
     let config = config::Config::from_env()?;
     tracing::info!("Configuration loaded successfully.");
-
+    setup_db(&config).await?;
     let db_pool = db::setup_db_pool(&config.database).await?;
     let server_addr = config.server.address.parse()?;
     tracing::info!("Starting gRPC server on {}", server_addr);
@@ -39,4 +39,10 @@ async fn main() -> anyhow::Result<()> {
         .await?;
 
     Ok(())
+}
+
+async fn setup_db(config: &config::Config) -> anyhow::Result<()> {
+    let db_pool = db::setup_db_pool(&config.admin_db).await?;
+    todo_backend::core::run_migrations(&db_pool).await?;
+    return Ok(());
 }

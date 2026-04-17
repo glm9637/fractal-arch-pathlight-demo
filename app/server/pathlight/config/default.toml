@@ -2,7 +2,11 @@
 address = "0.0.0.0:50051"
 
 [database]
-url = "sqlite://todos.db?mode=rwc"
+url = "postgres://pathlight:PathlightSecurePassword123!@localhost:5432/pathlight"
+
+[admin_db]
+url = "postgres://postgres:postgresPassword!@localhost:5432/pathlight"
+
 
 [website]
 url = "http://localhost:8080"

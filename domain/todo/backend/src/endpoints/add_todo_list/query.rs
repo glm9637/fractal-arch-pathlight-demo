@@ -1,6 +1,6 @@
 use todo_api_server::v1::request::AddTodoEntryRequest;
 
-use crate::add_todo_list::model::TodoRecord;
+use super::model::TodoRecord;
 
 pub async fn add_todo_entry(
     db_pool: &sqlx::PgPool,

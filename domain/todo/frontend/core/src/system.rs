@@ -17,7 +17,6 @@ pub fn init_engine(initial_state: TodoState, config: TodoSystemConfig) -> anyhow
     };
     let mut lock = TODO_ENGINE.write().unwrap();
     *lock = Some(Arc::new(TodoEngine::new(initial_state, resources)));
-
     return Ok(());
 }
 

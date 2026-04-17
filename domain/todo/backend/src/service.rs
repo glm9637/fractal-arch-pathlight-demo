@@ -1,5 +1,5 @@
-use crate::add_todo_list::command::add_todo_entry;
-use crate::get_todo_list;
+use crate::endpoints::add_todo_list;
+use crate::endpoints::get_todo_list;
 use rust_utils::result_to_response;
 use todo_api_server::v1::request::{AddTodoEntryRequest, GetTodoListRequest};
 use todo_api_server::v1::response::{AddTodoEntryResponse, GetTodoListResponse};
@@ -27,7 +27,7 @@ impl TodoService for ToDoBackendServiceImpl {
         request: Request<AddTodoEntryRequest>,
     ) -> std::result::Result<Response<AddTodoEntryResponse>, Status> {
         let entry = request.get_ref();
-        let response = add_todo_entry(&self.sqlite_pool, entry).await;
+        let response = add_todo_list::command::add_todo_entry(&self.sqlite_pool, entry).await;
         return result_to_response::map_result_to_grpc_response(response);
     }
 }

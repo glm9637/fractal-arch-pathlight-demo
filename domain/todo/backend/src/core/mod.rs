@@ -1,9 +1,9 @@
-use sqlx::sqlite::SqlitePool;
+use sqlx::postgres::PgPool;
 use todo_api_server::v1::service::todo_service_server::TodoServiceServer;
 
 use crate::service::ToDoBackendServiceImpl;
 
-async fn run_migrations(pool: &SqlitePool) -> anyhow::Result<()> {
+pub async fn run_migrations(pool: &PgPool) -> anyhow::Result<()> {
     tracing::info!("Running Todo domain database migrations...");
 
     sqlx::migrate!("../db").run(pool).await?;
@@ -13,9 +13,8 @@ async fn run_migrations(pool: &SqlitePool) -> anyhow::Result<()> {
 }
 
 pub async fn init_domain(
-    pool: SqlitePool,
+    pool: PgPool,
 ) -> anyhow::Result<TodoServiceServer<ToDoBackendServiceImpl>> {
-    run_migrations(&pool).await?;
     let service = ToDoBackendServiceImpl { sqlite_pool: pool };
     Ok(TodoServiceServer::new(service))
 }

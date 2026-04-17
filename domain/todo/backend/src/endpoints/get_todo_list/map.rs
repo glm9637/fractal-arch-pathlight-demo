@@ -1,7 +1,7 @@
 use shared_models::v1::Uuid;
 use todo_api_server::v1::response::{GetTodoListResponse, get_todo_list_response::TodoEntry};
 
-use crate::get_todo_list::model::TodoRecord;
+use super::model::TodoRecord;
 
 pub fn map_todo_record_to_response_entry(record: &Vec<TodoRecord>) -> GetTodoListResponse {
     return GetTodoListResponse {

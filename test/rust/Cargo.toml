@@ -1,0 +1,9 @@
+[package]
+name = "workspace_tests"
+version = "0.0.1"
+edition = "2024"
+publish = false
+
+[dependencies]
+walkdir = { workspace = true }
+regex = { workspace = true }

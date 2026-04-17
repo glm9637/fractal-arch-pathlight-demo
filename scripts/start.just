@@ -25,3 +25,6 @@ infra:
     #!/usr/bin/env bash
     set -a; source ../.env; set +a; \
     podman compose --env-file ../infra/.env --file ../infra/docker-compose.yml up -d
+
+migrations:
+    sqlx migrate run --source ../domain/todo/db

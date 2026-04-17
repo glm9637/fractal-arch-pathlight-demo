@@ -1,18 +1,23 @@
-name: pathlight
+name: pathlight_workspace
 description: The Workspace for the Pathlight project.
 version: 1.0.0
 
 publish_to: none
 environment:
-  sdk: ^3.9.0
+  sdk: ^3.11.0
 workspace:
+  - app/client/pathlight
   - domain/shared/flutter_rust
   - domain/todo/frontend
   - domain/shared/state_machine/flutter
 
 dependencies: 
   freezed_annotation: ^3.1.0  
+  openid_client: ^0.4.10
 dev_dependencies:
-  melos: ^7.5.0
   freezed: ^3.2.5
   build_runner: ^2.13.1
+  dart_arch_test: ^0.3.1
+  flutter_test:
+    sdk: flutter
+  
