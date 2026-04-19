@@ -1,14 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rust/todo.dart';
 
-class TodoScreen extends StatefulWidget {
-  const TodoScreen({super.key});
+@RoutePage()
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<TodoScreen> createState() => _TodoScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _TodoScreenState extends State<TodoScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();

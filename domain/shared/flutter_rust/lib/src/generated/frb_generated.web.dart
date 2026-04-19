@@ -6,6 +6,9 @@
 // Static analysis wrongly picks the IO variant, thus ignore this
 // ignore_for_file: argument_type_not_assignable
 
+import 'api/auto_gateway/auth/command.dart';
+import 'api/auto_gateway/auth/lifetime.dart';
+import 'api/auto_gateway/auth/selector.dart';
 import 'api/auto_gateway/todo/command.dart';
 import 'api/auto_gateway/todo/lifetime.dart';
 import 'api/auto_gateway/todo/selector.dart';
@@ -27,6 +30,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AnyhowException dco_decode_AnyhowException(dynamic raw);
 
   @protected
+  RustStreamSink<LoggedIn> dco_decode_StreamSink_logged_in_Sse(dynamic raw);
+
+  @protected
   RustStreamSink<TodoList> dco_decode_StreamSink_todo_list_Sse(dynamic raw);
 
   @protected
@@ -36,10 +42,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AddTodoCommand dco_decode_add_todo_command(dynamic raw);
 
   @protected
+  AuthSystemConfig dco_decode_auth_system_config(dynamic raw);
+
+  @protected
+  bool dco_decode_bool(dynamic raw);
+
+  @protected
   AddTodoCommand dco_decode_box_autoadd_add_todo_command(dynamic raw);
 
   @protected
+  AuthSystemConfig dco_decode_box_autoadd_auth_system_config(dynamic raw);
+
+  @protected
   LoadTodosCommand dco_decode_box_autoadd_load_todos_command(dynamic raw);
+
+  @protected
+  SetTokensCommand dco_decode_box_autoadd_set_tokens_command(dynamic raw);
 
   @protected
   TodoSystemConfig dco_decode_box_autoadd_todo_system_config(dynamic raw);
@@ -52,6 +70,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LoadTodosCommand dco_decode_load_todos_command(dynamic raw);
+
+  @protected
+  LoggedIn dco_decode_logged_in(dynamic raw);
+
+  @protected
+  SetTokensCommand dco_decode_set_tokens_command(dynamic raw);
 
   @protected
   TodoList dco_decode_todo_list(dynamic raw);
@@ -72,6 +96,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer);
 
   @protected
+  RustStreamSink<LoggedIn> sse_decode_StreamSink_logged_in_Sse(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   RustStreamSink<TodoList> sse_decode_StreamSink_todo_list_Sse(
     SseDeserializer deserializer,
   );
@@ -83,12 +112,28 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   AddTodoCommand sse_decode_add_todo_command(SseDeserializer deserializer);
 
   @protected
+  AuthSystemConfig sse_decode_auth_system_config(SseDeserializer deserializer);
+
+  @protected
+  bool sse_decode_bool(SseDeserializer deserializer);
+
+  @protected
   AddTodoCommand sse_decode_box_autoadd_add_todo_command(
     SseDeserializer deserializer,
   );
 
   @protected
+  AuthSystemConfig sse_decode_box_autoadd_auth_system_config(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   LoadTodosCommand sse_decode_box_autoadd_load_todos_command(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  SetTokensCommand sse_decode_box_autoadd_set_tokens_command(
     SseDeserializer deserializer,
   );
 
@@ -105,6 +150,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   LoadTodosCommand sse_decode_load_todos_command(SseDeserializer deserializer);
+
+  @protected
+  LoggedIn sse_decode_logged_in(SseDeserializer deserializer);
+
+  @protected
+  SetTokensCommand sse_decode_set_tokens_command(SseDeserializer deserializer);
 
   @protected
   TodoList sse_decode_todo_list(SseDeserializer deserializer);
@@ -125,11 +176,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int sse_decode_i_32(SseDeserializer deserializer);
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer);
-
-  @protected
   void sse_encode_AnyhowException(
     AnyhowException self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_StreamSink_logged_in_Sse(
+    RustStreamSink<LoggedIn> self,
     SseSerializer serializer,
   );
 
@@ -149,14 +203,35 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_auth_system_config(
+    AuthSystemConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_bool(bool self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_add_todo_command(
     AddTodoCommand self,
     SseSerializer serializer,
   );
 
   @protected
+  void sse_encode_box_autoadd_auth_system_config(
+    AuthSystemConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_load_todos_command(
     LoadTodosCommand self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_box_autoadd_set_tokens_command(
+    SetTokensCommand self,
     SseSerializer serializer,
   );
 
@@ -182,6 +257,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_logged_in(LoggedIn self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_set_tokens_command(
+    SetTokensCommand self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_todo_list(TodoList self, SseSerializer serializer);
 
   @protected
@@ -201,9 +285,6 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_bool(bool self, SseSerializer serializer);
 }
 
 // Section: wire_class

@@ -3,6 +3,9 @@
 
 // ignore_for_file: unused_import, unused_element, unnecessary_import, duplicate_ignore, invalid_use_of_internal_member, annotate_overrides, non_constant_identifier_names, curly_braces_in_flow_control_structures, prefer_const_literals_to_create_immutables, unused_field
 
+import 'api/auto_gateway/auth/command.dart';
+import 'api/auto_gateway/auth/lifetime.dart';
+import 'api/auto_gateway/auth/selector.dart';
 import 'api/auto_gateway/todo/command.dart';
 import 'api/auto_gateway/todo/lifetime.dart';
 import 'api/auto_gateway/todo/selector.dart';
@@ -67,7 +70,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => -1001053998;
+  int get rustContentHash => -189322032;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -87,13 +90,25 @@ abstract class RustLibApi extends BaseApi {
     required LoadTodosCommand command,
   });
 
+  Future<void> crateApiAutoGatewayAuthCommandDispatchSetTokensCommand({
+    required SetTokensCommand command,
+  });
+
+  Future<void> crateApiAutoGatewayAuthLifetimeDisposeAuthSystem();
+
   Future<void> crateApiAutoGatewayTodoLifetimeDisposeTodoSystem();
+
+  Future<void> crateApiAutoGatewayAuthLifetimeInitAuthSystem({
+    required AuthSystemConfig config,
+  });
 
   Future<void> crateApiLoggingInitLogging();
 
   Future<void> crateApiAutoGatewayTodoLifetimeInitTodoSystem({
     required TodoSystemConfig config,
   });
+
+  Stream<LoggedIn> crateApiAutoGatewayAuthSelectorWatchLoggedIn();
 
   Stream<TodoList> crateApiAutoGatewayTodoSelectorWatchTodoList();
 }
@@ -177,6 +192,69 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
+  Future<void> crateApiAutoGatewayAuthCommandDispatchSetTokensCommand({
+    required SetTokensCommand command,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_set_tokens_command(command, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 3,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta:
+            kCrateApiAutoGatewayAuthCommandDispatchSetTokensCommandConstMeta,
+        argValues: [command],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiAutoGatewayAuthCommandDispatchSetTokensCommandConstMeta =>
+      const TaskConstMeta(
+        debugName: "dispatch_set_tokens_command",
+        argNames: ["command"],
+      );
+
+  @override
+  Future<void> crateApiAutoGatewayAuthLifetimeDisposeAuthSystem() {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 4,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiAutoGatewayAuthLifetimeDisposeAuthSystemConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta
+  get kCrateApiAutoGatewayAuthLifetimeDisposeAuthSystemConstMeta =>
+      const TaskConstMeta(debugName: "dispose_auth_system", argNames: []);
+
+  @override
   Future<void> crateApiAutoGatewayTodoLifetimeDisposeTodoSystem() {
     return handler.executeNormal(
       NormalTask(
@@ -185,7 +263,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 3,
+            funcId: 5,
             port: port_,
           );
         },
@@ -205,6 +283,36 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "dispose_todo_system", argNames: []);
 
   @override
+  Future<void> crateApiAutoGatewayAuthLifetimeInitAuthSystem({
+    required AuthSystemConfig config,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_box_autoadd_auth_system_config(config, serializer);
+          pdeCallFfi(
+            generalizedFrbRustBinding,
+            serializer,
+            funcId: 6,
+            port: port_,
+          );
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_unit,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+        constMeta: kCrateApiAutoGatewayAuthLifetimeInitAuthSystemConstMeta,
+        argValues: [config],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiAutoGatewayAuthLifetimeInitAuthSystemConstMeta =>
+      const TaskConstMeta(debugName: "init_auth_system", argNames: ["config"]);
+
+  @override
   Future<void> crateApiLoggingInitLogging() {
     return handler.executeNormal(
       NormalTask(
@@ -213,7 +321,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 4,
+            funcId: 7,
             port: port_,
           );
         },
@@ -243,7 +351,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 5,
+            funcId: 8,
             port: port_,
           );
         },
@@ -262,6 +370,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "init_todo_system", argNames: ["config"]);
 
   @override
+  Stream<LoggedIn> crateApiAutoGatewayAuthSelectorWatchLoggedIn() {
+    final sink = RustStreamSink<LoggedIn>();
+    unawaited(
+      handler.executeNormal(
+        NormalTask(
+          callFfi: (port_) {
+            final serializer = SseSerializer(generalizedFrbRustBinding);
+            sse_encode_StreamSink_logged_in_Sse(sink, serializer);
+            pdeCallFfi(
+              generalizedFrbRustBinding,
+              serializer,
+              funcId: 9,
+              port: port_,
+            );
+          },
+          codec: SseCodec(
+            decodeSuccessData: sse_decode_unit,
+            decodeErrorData: null,
+          ),
+          constMeta: kCrateApiAutoGatewayAuthSelectorWatchLoggedInConstMeta,
+          argValues: [sink],
+          apiImpl: this,
+        ),
+      ),
+    );
+    return sink.stream;
+  }
+
+  TaskConstMeta get kCrateApiAutoGatewayAuthSelectorWatchLoggedInConstMeta =>
+      const TaskConstMeta(debugName: "watch_logged_in", argNames: ["sink"]);
+
+  @override
   Stream<TodoList> crateApiAutoGatewayTodoSelectorWatchTodoList() {
     final sink = RustStreamSink<TodoList>();
     unawaited(
@@ -273,7 +413,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             pdeCallFfi(
               generalizedFrbRustBinding,
               serializer,
-              funcId: 6,
+              funcId: 10,
               port: port_,
             );
           },
@@ -300,6 +440,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  RustStreamSink<LoggedIn> dco_decode_StreamSink_logged_in_Sse(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    throw UnimplementedError();
+  }
+
+  @protected
   RustStreamSink<TodoList> dco_decode_StreamSink_todo_list_Sse(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     throw UnimplementedError();
@@ -321,15 +467,42 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AuthSystemConfig dco_decode_auth_system_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return AuthSystemConfig(baseUrl: dco_decode_String(arr[0]));
+  }
+
+  @protected
+  bool dco_decode_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
+  }
+
+  @protected
   AddTodoCommand dco_decode_box_autoadd_add_todo_command(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_add_todo_command(raw);
   }
 
   @protected
+  AuthSystemConfig dco_decode_box_autoadd_auth_system_config(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_auth_system_config(raw);
+  }
+
+  @protected
   LoadTodosCommand dco_decode_box_autoadd_load_todos_command(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_load_todos_command(raw);
+  }
+
+  @protected
+  SetTokensCommand dco_decode_box_autoadd_set_tokens_command(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_set_tokens_command(raw);
   }
 
   @protected
@@ -359,6 +532,27 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     return LoadTodosCommand(
       limit: dco_decode_usize(arr[0]),
       offset: dco_decode_usize(arr[1]),
+    );
+  }
+
+  @protected
+  LoggedIn dco_decode_logged_in(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return LoggedIn(loggedIn: dco_decode_bool(arr[0]));
+  }
+
+  @protected
+  SetTokensCommand dco_decode_set_tokens_command(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return SetTokensCommand(
+      accessToken: dco_decode_String(arr[0]),
+      refreshToken: dco_decode_String(arr[1]),
     );
   }
 
@@ -406,6 +600,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  RustStreamSink<LoggedIn> sse_decode_StreamSink_logged_in_Sse(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    throw UnimplementedError('Unreachable ()');
+  }
+
+  @protected
   RustStreamSink<TodoList> sse_decode_StreamSink_todo_list_Sse(
     SseDeserializer deserializer,
   ) {
@@ -428,6 +630,19 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AuthSystemConfig sse_decode_auth_system_config(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_baseUrl = sse_decode_String(deserializer);
+    return AuthSystemConfig(baseUrl: var_baseUrl);
+  }
+
+  @protected
+  bool sse_decode_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint8() != 0;
+  }
+
+  @protected
   AddTodoCommand sse_decode_box_autoadd_add_todo_command(
     SseDeserializer deserializer,
   ) {
@@ -436,11 +651,27 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  AuthSystemConfig sse_decode_box_autoadd_auth_system_config(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_auth_system_config(deserializer));
+  }
+
+  @protected
   LoadTodosCommand sse_decode_box_autoadd_load_todos_command(
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_load_todos_command(deserializer));
+  }
+
+  @protected
+  SetTokensCommand sse_decode_box_autoadd_set_tokens_command(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_set_tokens_command(deserializer));
   }
 
   @protected
@@ -476,6 +707,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_limit = sse_decode_usize(deserializer);
     var var_offset = sse_decode_usize(deserializer);
     return LoadTodosCommand(limit: var_limit, offset: var_offset);
+  }
+
+  @protected
+  LoggedIn sse_decode_logged_in(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_loggedIn = sse_decode_bool(deserializer);
+    return LoggedIn(loggedIn: var_loggedIn);
+  }
+
+  @protected
+  SetTokensCommand sse_decode_set_tokens_command(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_accessToken = sse_decode_String(deserializer);
+    var var_refreshToken = sse_decode_String(deserializer);
+    return SetTokensCommand(
+      accessToken: var_accessToken,
+      refreshToken: var_refreshToken,
+    );
   }
 
   @protected
@@ -516,18 +765,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getUint8() != 0;
-  }
-
-  @protected
   void sse_encode_AnyhowException(
     AnyhowException self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.message, serializer);
+  }
+
+  @protected
+  void sse_encode_StreamSink_logged_in_Sse(
+    RustStreamSink<LoggedIn> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(
+      self.setupAndSerialize(
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_logged_in,
+          decodeErrorData: sse_decode_AnyhowException,
+        ),
+      ),
+      serializer,
+    );
   }
 
   @protected
@@ -563,6 +823,21 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_auth_system_config(
+    AuthSystemConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.baseUrl, serializer);
+  }
+
+  @protected
+  void sse_encode_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint8(self ? 1 : 0);
+  }
+
+  @protected
   void sse_encode_box_autoadd_add_todo_command(
     AddTodoCommand self,
     SseSerializer serializer,
@@ -572,12 +847,30 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_auth_system_config(
+    AuthSystemConfig self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_auth_system_config(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_load_todos_command(
     LoadTodosCommand self,
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_load_todos_command(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_set_tokens_command(
+    SetTokensCommand self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_set_tokens_command(self, serializer);
   }
 
   @protected
@@ -619,6 +912,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_logged_in(LoggedIn self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_bool(self.loggedIn, serializer);
+  }
+
+  @protected
+  void sse_encode_set_tokens_command(
+    SetTokensCommand self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.accessToken, serializer);
+    sse_encode_String(self.refreshToken, serializer);
+  }
+
+  @protected
   void sse_encode_todo_list(TodoList self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_String(self.items, serializer);
@@ -654,11 +963,5 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_i_32(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putInt32(self);
-  }
-
-  @protected
-  void sse_encode_bool(bool self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putUint8(self ? 1 : 0);
   }
 }

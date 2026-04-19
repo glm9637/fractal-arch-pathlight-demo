@@ -38,7 +38,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.12.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1001053998;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -189322032;
 
 // Section: executor
 
@@ -131,6 +131,84 @@ fn wire__crate__api__auto_gateway__todo__command__dispatch_load_todos_command_im
         },
     )
 }
+fn wire__crate__api__auto_gateway__auth__command__dispatch_set_tokens_command_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "dispatch_set_tokens_command",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_command =
+                <crate::api::auto_gateway::auth::command::SetTokensCommand>::sse_decode(
+                    &mut deserializer,
+                );
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || async move {
+                        let output_ok =
+                            crate::api::auto_gateway::auth::command::dispatch_set_tokens_command(
+                                api_command,
+                            )
+                            .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__auto_gateway__auth__lifetime__dispose_auth_system_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "dispose_auth_system",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || {
+                        let output_ok =
+                            crate::api::auto_gateway::auth::lifetime::dispose_auth_system()?;
+                        Ok(output_ok)
+                    })(),
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__auto_gateway__todo__lifetime__dispose_todo_system_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -159,6 +237,45 @@ fn wire__crate__api__auto_gateway__todo__lifetime__dispose_todo_system_impl(
                     (move || {
                         let output_ok =
                             crate::api::auto_gateway::todo::lifetime::dispose_todo_system()?;
+                        Ok(output_ok)
+                    })(),
+                )
+            }
+        },
+    )
+}
+fn wire__crate__api__auto_gateway__auth__lifetime__init_auth_system_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "init_auth_system",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_config =
+                <crate::api::auto_gateway::auth::lifetime::AuthSystemConfig>::sse_decode(
+                    &mut deserializer,
+                );
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, flutter_rust_bridge::for_generated::anyhow::Error>(
+                    (move || {
+                        let output_ok =
+                            crate::api::auto_gateway::auth::lifetime::init_auth_system(api_config)?;
                         Ok(output_ok)
                     })(),
                 )
@@ -239,6 +356,48 @@ fn wire__crate__api__auto_gateway__todo__lifetime__init_todo_system_impl(
         },
     )
 }
+fn wire__crate__api__auto_gateway__auth__selector__watch_logged_in_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "watch_logged_in",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_sink = <StreamSink<
+                crate::api::auto_gateway::auth::selector::LoggedIn,
+                flutter_rust_bridge::for_generated::SseCodec,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, ()>(
+                    (move || async move {
+                        let output_ok = Result::<_, ()>::Ok({
+                            crate::api::auto_gateway::auth::selector::watch_logged_in(api_sink)
+                                .await;
+                        })?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__api__auto_gateway__todo__selector__watch_todo_list_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -292,10 +451,25 @@ const _: fn() = || {
         let _: String = AddTodoCommand.text;
     }
     {
+        let AuthSystemConfig =
+            None::<crate::api::auto_gateway::auth::lifetime::AuthSystemConfig>.unwrap();
+        let _: String = AuthSystemConfig.base_url;
+    }
+    {
         let LoadTodosCommand =
             None::<crate::api::auto_gateway::todo::command::LoadTodosCommand>.unwrap();
         let _: usize = LoadTodosCommand.limit;
         let _: usize = LoadTodosCommand.offset;
+    }
+    {
+        let LoggedIn = None::<crate::api::auto_gateway::auth::selector::LoggedIn>.unwrap();
+        let _: bool = LoggedIn.logged_in;
+    }
+    {
+        let SetTokensCommand =
+            None::<crate::api::auto_gateway::auth::command::SetTokensCommand>.unwrap();
+        let _: String = SetTokensCommand.access_token;
+        let _: String = SetTokensCommand.refresh_token;
     }
     {
         let TodoList = None::<crate::api::auto_gateway::todo::selector::TodoList>.unwrap();
@@ -315,6 +489,19 @@ impl SseDecode for flutter_rust_bridge::for_generated::anyhow::Error {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <String>::sse_decode(deserializer);
         return flutter_rust_bridge::for_generated::anyhow::anyhow!("{}", inner);
+    }
+}
+
+impl SseDecode
+    for StreamSink<
+        crate::api::auto_gateway::auth::selector::LoggedIn,
+        flutter_rust_bridge::for_generated::SseCodec,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <String>::sse_decode(deserializer);
+        return StreamSink::deserialize(inner);
     }
 }
 
@@ -344,6 +531,23 @@ impl SseDecode for crate::api::auto_gateway::todo::command::AddTodoCommand {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_text = <String>::sse_decode(deserializer);
         return crate::api::auto_gateway::todo::command::AddTodoCommand { text: var_text };
+    }
+}
+
+impl SseDecode for crate::api::auto_gateway::auth::lifetime::AuthSystemConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_baseUrl = <String>::sse_decode(deserializer);
+        return crate::api::auto_gateway::auth::lifetime::AuthSystemConfig {
+            base_url: var_baseUrl,
+        };
+    }
+}
+
+impl SseDecode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u8().unwrap() != 0
     }
 }
 
@@ -379,6 +583,28 @@ impl SseDecode for crate::api::auto_gateway::todo::command::LoadTodosCommand {
         return crate::api::auto_gateway::todo::command::LoadTodosCommand {
             limit: var_limit,
             offset: var_offset,
+        };
+    }
+}
+
+impl SseDecode for crate::api::auto_gateway::auth::selector::LoggedIn {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_loggedIn = <bool>::sse_decode(deserializer);
+        return crate::api::auto_gateway::auth::selector::LoggedIn {
+            logged_in: var_loggedIn,
+        };
+    }
+}
+
+impl SseDecode for crate::api::auto_gateway::auth::command::SetTokensCommand {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_accessToken = <String>::sse_decode(deserializer);
+        let mut var_refreshToken = <String>::sse_decode(deserializer);
+        return crate::api::auto_gateway::auth::command::SetTokensCommand {
+            access_token: var_accessToken,
+            refresh_token: var_refreshToken,
         };
     }
 }
@@ -427,13 +653,6 @@ impl SseDecode for i32 {
     }
 }
 
-impl SseDecode for bool {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_u8().unwrap() != 0
-    }
-}
-
 fn pde_ffi_dispatcher_primary_impl(
     func_id: i32,
     port: flutter_rust_bridge::for_generated::MessagePort,
@@ -455,20 +674,44 @@ fn pde_ffi_dispatcher_primary_impl(
             rust_vec_len,
             data_len,
         ),
-        3 => wire__crate__api__auto_gateway__todo__lifetime__dispose_todo_system_impl(
+        3 => wire__crate__api__auto_gateway__auth__command__dispatch_set_tokens_command_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        4 => wire__crate__api__logging__init_logging_impl(port, ptr, rust_vec_len, data_len),
-        5 => wire__crate__api__auto_gateway__todo__lifetime__init_todo_system_impl(
+        4 => wire__crate__api__auto_gateway__auth__lifetime__dispose_auth_system_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        6 => wire__crate__api__auto_gateway__todo__selector__watch_todo_list_impl(
+        5 => wire__crate__api__auto_gateway__todo__lifetime__dispose_todo_system_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        6 => wire__crate__api__auto_gateway__auth__lifetime__init_auth_system_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        7 => wire__crate__api__logging__init_logging_impl(port, ptr, rust_vec_len, data_len),
+        8 => wire__crate__api__auto_gateway__todo__lifetime__init_todo_system_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        9 => wire__crate__api__auto_gateway__auth__selector__watch_logged_in_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        10 => wire__crate__api__auto_gateway__todo__selector__watch_todo_list_impl(
             port,
             ptr,
             rust_vec_len,
@@ -515,6 +758,29 @@ impl
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart
+    for FrbWrapper<crate::api::auto_gateway::auth::lifetime::AuthSystemConfig>
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.0.base_url.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::auto_gateway::auth::lifetime::AuthSystemConfig>
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        FrbWrapper<crate::api::auto_gateway::auth::lifetime::AuthSystemConfig>,
+    > for crate::api::auto_gateway::auth::lifetime::AuthSystemConfig
+{
+    fn into_into_dart(
+        self,
+    ) -> FrbWrapper<crate::api::auto_gateway::auth::lifetime::AuthSystemConfig> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
     for FrbWrapper<crate::api::auto_gateway::todo::command::LoadTodosCommand>
 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
@@ -537,6 +803,54 @@ impl
     fn into_into_dart(
         self,
     ) -> FrbWrapper<crate::api::auto_gateway::todo::command::LoadTodosCommand> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for FrbWrapper<crate::api::auto_gateway::auth::selector::LoggedIn>
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.0.logged_in.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::auto_gateway::auth::selector::LoggedIn>
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        FrbWrapper<crate::api::auto_gateway::auth::selector::LoggedIn>,
+    > for crate::api::auto_gateway::auth::selector::LoggedIn
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::api::auto_gateway::auth::selector::LoggedIn> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for FrbWrapper<crate::api::auto_gateway::auth::command::SetTokensCommand>
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.access_token.into_into_dart().into_dart(),
+            self.0.refresh_token.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::api::auto_gateway::auth::command::SetTokensCommand>
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        FrbWrapper<crate::api::auto_gateway::auth::command::SetTokensCommand>,
+    > for crate::api::auto_gateway::auth::command::SetTokensCommand
+{
+    fn into_into_dart(
+        self,
+    ) -> FrbWrapper<crate::api::auto_gateway::auth::command::SetTokensCommand> {
         self.into()
     }
 }
@@ -594,6 +908,18 @@ impl SseEncode for flutter_rust_bridge::for_generated::anyhow::Error {
 
 impl SseEncode
     for StreamSink<
+        crate::api::auto_gateway::auth::selector::LoggedIn,
+        flutter_rust_bridge::for_generated::SseCodec,
+    >
+{
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        unimplemented!("")
+    }
+}
+
+impl SseEncode
+    for StreamSink<
         crate::api::auto_gateway::todo::selector::TodoList,
         flutter_rust_bridge::for_generated::SseCodec,
     >
@@ -615,6 +941,20 @@ impl SseEncode for crate::api::auto_gateway::todo::command::AddTodoCommand {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.text, serializer);
+    }
+}
+
+impl SseEncode for crate::api::auto_gateway::auth::lifetime::AuthSystemConfig {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.base_url, serializer);
+    }
+}
+
+impl SseEncode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u8(self as _).unwrap();
     }
 }
 
@@ -643,6 +983,21 @@ impl SseEncode for crate::api::auto_gateway::todo::command::LoadTodosCommand {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <usize>::sse_encode(self.limit, serializer);
         <usize>::sse_encode(self.offset, serializer);
+    }
+}
+
+impl SseEncode for crate::api::auto_gateway::auth::selector::LoggedIn {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.logged_in, serializer);
+    }
+}
+
+impl SseEncode for crate::api::auto_gateway::auth::command::SetTokensCommand {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.access_token, serializer);
+        <String>::sse_encode(self.refresh_token, serializer);
     }
 }
 
@@ -686,13 +1041,6 @@ impl SseEncode for i32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         serializer.cursor.write_i32::<NativeEndian>(self).unwrap();
-    }
-}
-
-impl SseEncode for bool {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer.cursor.write_u8(self as _).unwrap();
     }
 }
 

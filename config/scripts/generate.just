@@ -3,6 +3,9 @@ frb:
     MONOREPO_ROOT="{{ justfile_dir() }}" cargo run --bin generate
     cd {{ justfile_dir() }}/domain/shared/flutter_rust && flutter_rust_bridge_codegen generate --config-file frb_config.yaml
 
+build_runner:
+    dart run build_runner build -d --workspace
+
 proto:
     #!/usr/bin/env bash
     set -e

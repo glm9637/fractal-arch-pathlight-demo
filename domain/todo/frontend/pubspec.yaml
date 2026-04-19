@@ -17,6 +17,7 @@ dependencies:
     path: ../../../domain/shared/state_machine/flutter
   flutter_rust_bridge: 2.12.0
   freezed_annotation: ^3.1.0
+  auto_route: ^11.1.0
 
 dev_dependencies:
   flutter_test:
@@ -26,3 +27,4 @@ dev_dependencies:
   build_runner: ^2.13.1
   dart_arch_test: ^0.3.1
   test: ^1.30.0
+  auto_route_generator: ^10.5.0

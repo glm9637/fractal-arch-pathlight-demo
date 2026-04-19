@@ -5,18 +5,11 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-# Inherit from workspace
-tokio = { workspace = true }
-tonic = { workspace = true }
-prost = { workspace = true }
-tonic-web = { workspace = true }
-serde = { workspace = true }
-tracing = { workspace = true }
-rust-utils = { workspace = true }
-shared-models = { workspace = true }
+state_machine = { workspace = true }
 anyhow = { workspace = true }
-sqlx = { workspace = true }
-uuid = { workspace = true }
+flutter_rust_bridge = { workspace = true }
+env_logger = { workspace = true }
+once_cell = { workspace = true }
 
 [lints]
 workspace = true

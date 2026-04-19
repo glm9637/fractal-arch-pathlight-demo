@@ -1,7 +1,7 @@
 use http::{HeaderValue, Method};
 use tonic::transport::Server;
 use tonic_web::GrpcWebLayer;
-use tower_http::cors::{AllowHeaders, CorsLayer};
+use tower_http::cors::CorsLayer;
 use tracing_subscriber::EnvFilter;
 mod config;
 mod db;
