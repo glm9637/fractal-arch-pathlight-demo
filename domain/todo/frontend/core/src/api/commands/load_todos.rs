@@ -1,10 +1,7 @@
-use state_machine::{command::Command, network::UniversalChannel};
-use todo_api_client::{
-    tonic,
-    v1::{request::GetTodoListRequest, service::todo_service_client::TodoServiceClient},
-};
+use state_machine::command::Command;
+use todo_api_client::{tonic, v1::request::GetTodoListRequest};
 
-use crate::domain::{TodoContext, TodoDomain};
+use crate::domain::{TodoClient, TodoContext, TodoDomain};
 
 pub struct LoadTodosCommand {
     pub limit: usize,
@@ -34,9 +31,7 @@ impl Command<TodoDomain> for LoadTodosCommand {
 }
 
 impl LoadTodosCommand {
-    async fn fetch_todos_from_network(
-        mut client: TodoServiceClient<UniversalChannel>,
-    ) -> anyhow::Result<Vec<String>> {
+    async fn fetch_todos_from_network(mut client: TodoClient) -> anyhow::Result<Vec<String>> {
         let request = tonic::Request::new(GetTodoListRequest { pagination: None });
 
         let response = client

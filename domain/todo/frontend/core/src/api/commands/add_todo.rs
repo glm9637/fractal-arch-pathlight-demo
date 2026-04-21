@@ -1,10 +1,7 @@
-use state_machine::{command::Command, network::UniversalChannel};
-use todo_api_client::{
-    tonic,
-    v1::{request::AddTodoEntryRequest, service::todo_service_client::TodoServiceClient},
-};
+use state_machine::command::Command;
+use todo_api_client::{tonic, v1::request::AddTodoEntryRequest};
 
-use crate::domain::{TodoContext, TodoDomain};
+use crate::domain::{TodoClient, TodoContext, TodoDomain};
 
 pub struct AddTodoCommand {
     pub text: String,
@@ -31,10 +28,7 @@ impl Command<TodoDomain> for AddTodoCommand {
 }
 
 impl AddTodoCommand {
-    async fn persist_entry(
-        &self,
-        mut client: TodoServiceClient<UniversalChannel>,
-    ) -> anyhow::Result<String> {
+    async fn persist_entry(&self, mut client: TodoClient) -> anyhow::Result<String> {
         let request = tonic::Request::new(AddTodoEntryRequest {
             title: self.text.clone(),
             completed: false,

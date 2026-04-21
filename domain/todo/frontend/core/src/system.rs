@@ -1,11 +1,12 @@
+use crate::integration::domain::auth::auth_interceptor::init_interceptor;
 use crate::{
     api::lifetime::TodoSystemConfig,
-    domain::{TodoEngine, TodoResources, TodoState},
+    domain::{TodoClient, TodoEngine, TodoResources, TodoState},
 };
 use once_cell::sync::Lazy;
 #[cfg(not(target_family = "wasm"))]
 use state_machine::network::RUNTIME;
-use state_machine::network::{UniversalChannel, create_channel};
+use state_machine::network::create_channel;
 use std::sync::{Arc, RwLock};
 use todo_api_client::v1::service::todo_service_client::TodoServiceClient;
 
@@ -35,11 +36,11 @@ pub fn dispose_engine() -> anyhow::Result<()> {
     return Ok(());
 }
 
-fn init_client(config: TodoSystemConfig) -> anyhow::Result<TodoServiceClient<UniversalChannel>> {
+fn init_client(config: TodoSystemConfig) -> anyhow::Result<TodoClient> {
     #[cfg(not(target_family = "wasm"))]
     let _guard = RUNTIME.enter();
-
+    let interceptor = init_interceptor();
     let channel = create_channel(config.base_url)?;
-    let client = TodoServiceClient::new(channel);
+    let client = TodoServiceClient::with_interceptor(channel, interceptor);
     return Ok(client);
 }

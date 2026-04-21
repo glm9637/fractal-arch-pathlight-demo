@@ -11,12 +11,12 @@ tonic = { workspace = true }
 prost = { workspace = true }
 tonic-web = { workspace = true }
 serde = { workspace = true }
+serde_json = { workspace = true }
+axum = { workspace = true }
+hyper = { workspace = true }
+reqwest = { workspace = true, features = ["json"] }
+jsonwebtoken = { workspace = true, features = ["rust_crypto"] }
 tracing = { workspace = true }
-rust-utils = { workspace = true }
-shared-models = { workspace = true }
-anyhow = { workspace = true }
-sqlx = { workspace = true }
-uuid = { workspace = true }
 
 [lints]
 workspace = true

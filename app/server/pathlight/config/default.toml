@@ -10,3 +10,7 @@ url = "postgres://postgres:postgresPassword!@localhost:5432/pathlight"
 
 [website]
 url = "http://localhost:4444"
+
+[zitadel]
+issuer_url = "http://localhost:8080"
+client_id = "368605239219126864"

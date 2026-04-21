@@ -21,11 +21,18 @@ pub struct WebsiteConfig {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+pub struct ZitadelConfig {
+    pub issuer_url: String,
+    pub client_id: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
     pub server: ServerConfig,
     pub database: DatabaseConfig,
     pub admin_db: DatabaseConfig,
     pub website: WebsiteConfig,
+    pub zitadel: ZitadelConfig,
 }
 
 impl Config {

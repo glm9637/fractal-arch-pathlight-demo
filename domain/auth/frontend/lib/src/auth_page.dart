@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rust/auth.dart';
 import 'package:oidc/oidc.dart';
-import 'package:state_machine_flutter/flutter.dart';
 
 import 'auth_helper.dart';
 import 'auth_notifier.dart';

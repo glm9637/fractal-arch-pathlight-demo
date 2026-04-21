@@ -1,6 +1,7 @@
 use crate::endpoints::add_todo_list;
 use crate::endpoints::get_todo_list;
 use rust_utils::result_to_response;
+use sqlx::postgres;
 use todo_api_server::v1::request::{AddTodoEntryRequest, GetTodoListRequest};
 use todo_api_server::v1::response::{AddTodoEntryResponse, GetTodoListResponse};
 use todo_api_server::v1::service::todo_service_server::TodoService;
@@ -8,7 +9,7 @@ use tonic::{Request, Response, Status};
 
 #[derive(Debug)]
 pub struct ToDoBackendServiceImpl {
-    pub sqlite_pool: sqlx::PgPool,
+    pub pg_pool: postgres::PgPool,
 }
 
 #[tonic::async_trait]
@@ -18,7 +19,7 @@ impl TodoService for ToDoBackendServiceImpl {
         request: Request<GetTodoListRequest>,
     ) -> std::result::Result<Response<GetTodoListResponse>, Status> {
         let pagination = &request.get_ref().pagination;
-        let response = get_todo_list::command::get_todo_list(&self.sqlite_pool, pagination).await;
+        let response = get_todo_list::command::get_todo_list(&self.pg_pool, pagination).await;
         return result_to_response::map_result_to_grpc_response(response);
     }
 
@@ -27,7 +28,7 @@ impl TodoService for ToDoBackendServiceImpl {
         request: Request<AddTodoEntryRequest>,
     ) -> std::result::Result<Response<AddTodoEntryResponse>, Status> {
         let entry = request.get_ref();
-        let response = add_todo_list::command::add_todo_entry(&self.sqlite_pool, entry).await;
+        let response = add_todo_list::command::add_todo_entry(&self.pg_pool, entry).await;
         return result_to_response::map_result_to_grpc_response(response);
     }
 }
