@@ -10,6 +10,7 @@ class AuthStateNotifier extends ChangeNotifier {
 
   StreamSubscription? _rustSubscription;
   StreamSubscription? _oidcSubscription;
+  StreamSubscription? _refreshSubscription;
 
   void startListening(OidcUserManager manager) {
     _rustSubscription ??= watchLoggedIn().listen((event) {
@@ -17,6 +18,25 @@ class AuthStateNotifier extends ChangeNotifier {
       if (_isLoggedIn != event.loggedIn) {
         _isLoggedIn = event.loggedIn;
         notifyListeners();
+      }
+    });
+
+    _refreshSubscription ??= watchNeedsRefresh().listen((event) async {
+      if (event.needsRefresh) {
+        debugPrint(
+          'Rust requested a token refresh! Attempting silent refresh...',
+        );
+
+        try {
+          final newUser = await manager.refreshToken();
+
+          if (newUser == null) {
+            debugPrint('Refresh failed (returned null). Logging out...');
+          }
+        } catch (e) {
+          debugPrint('Fatal error during token refresh: $e');
+          // await _handleLogout(manager);
+        }
       }
     });
 

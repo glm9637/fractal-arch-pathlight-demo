@@ -12,6 +12,7 @@ env_logger = { workspace = true }
 once_cell = { workspace = true }
 tonic = { workspace = true }
 tokio = { workspace = true }
+tracing = { workspace = true }
 
 [lints]
 workspace = true

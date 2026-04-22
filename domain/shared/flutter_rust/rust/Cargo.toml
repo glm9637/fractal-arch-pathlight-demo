@@ -16,6 +16,12 @@ walkdir = { workspace = true }
 syn = { workspace = true }
 quote = { workspace = true }
 env_logger = { workspace = true }
+tracing = { workspace = true }
+
+
+[target.'cfg(target_family = "wasm")'.dependencies]
+tracing-wasm = { workspace = true }
+console_error_panic_hook = { workspace = true }
 
 [lints.rust]
 unexpected_cfgs = "allow"

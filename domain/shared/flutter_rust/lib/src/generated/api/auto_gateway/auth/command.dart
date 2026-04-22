@@ -11,6 +11,13 @@ Future<void> dispatchSetTokensCommand({required SetTokensCommand command}) =>
       command: command,
     );
 
+Future<void> dispatchTriggerRefreshCommand({
+  required TriggerRefreshCommand command,
+}) => RustLib.instance.api
+    .crateApiAutoGatewayAuthCommandDispatchTriggerRefreshCommand(
+      command: command,
+    );
+
 class SetTokensCommand {
   final String accessToken;
   final String refreshToken;
@@ -30,4 +37,16 @@ class SetTokensCommand {
           runtimeType == other.runtimeType &&
           accessToken == other.accessToken &&
           refreshToken == other.refreshToken;
+}
+
+class TriggerRefreshCommand {
+  const TriggerRefreshCommand();
+
+  @override
+  int get hashCode => 0;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TriggerRefreshCommand && runtimeType == other.runtimeType;
 }

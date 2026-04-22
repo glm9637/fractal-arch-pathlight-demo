@@ -1,5 +1,5 @@
 use state_machine::command::Command;
-use todo_api_client::{tonic, v1::request::GetTodoListRequest};
+use todo_api_client::v1::request::GetTodoListRequest;
 
 use crate::domain::{TodoClient, TodoContext, TodoDomain};
 
@@ -31,20 +31,15 @@ impl Command<TodoDomain> for LoadTodosCommand {
 }
 
 impl LoadTodosCommand {
-    async fn fetch_todos_from_network(mut client: TodoClient) -> anyhow::Result<Vec<String>> {
-        let request = tonic::Request::new(GetTodoListRequest { pagination: None });
+    async fn fetch_todos_from_network(client: TodoClient) -> anyhow::Result<Vec<String>> {
+        let request = GetTodoListRequest { pagination: None };
 
         let response = client
             .get_todo_list(request)
             .await
             .map_err(|e| anyhow::anyhow!("gRPC Error: {}", e))?;
 
-        let items = response
-            .into_inner()
-            .items
-            .into_iter()
-            .map(|item| item.title)
-            .collect();
+        let items = response.items.into_iter().map(|item| item.title).collect();
         println!("Fetched todos: {:?}", items);
         return Ok(items);
     }

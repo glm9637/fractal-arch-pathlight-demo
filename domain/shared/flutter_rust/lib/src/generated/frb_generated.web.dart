@@ -33,6 +33,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   RustStreamSink<LoggedIn> dco_decode_StreamSink_logged_in_Sse(dynamic raw);
 
   @protected
+  RustStreamSink<NeedsRefresh> dco_decode_StreamSink_needs_refresh_Sse(
+    dynamic raw,
+  );
+
+  @protected
   RustStreamSink<TodoList> dco_decode_StreamSink_todo_list_Sse(dynamic raw);
 
   @protected
@@ -63,6 +68,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   TodoSystemConfig dco_decode_box_autoadd_todo_system_config(dynamic raw);
 
   @protected
+  TriggerRefreshCommand dco_decode_box_autoadd_trigger_refresh_command(
+    dynamic raw,
+  );
+
+  @protected
   List<String> dco_decode_list_String(dynamic raw);
 
   @protected
@@ -75,6 +85,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   LoggedIn dco_decode_logged_in(dynamic raw);
 
   @protected
+  NeedsRefresh dco_decode_needs_refresh(dynamic raw);
+
+  @protected
   SetTokensCommand dco_decode_set_tokens_command(dynamic raw);
 
   @protected
@@ -82,6 +95,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   TodoSystemConfig dco_decode_todo_system_config(dynamic raw);
+
+  @protected
+  TriggerRefreshCommand dco_decode_trigger_refresh_command(dynamic raw);
 
   @protected
   int dco_decode_u_8(dynamic raw);
@@ -97,6 +113,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   RustStreamSink<LoggedIn> sse_decode_StreamSink_logged_in_Sse(
+    SseDeserializer deserializer,
+  );
+
+  @protected
+  RustStreamSink<NeedsRefresh> sse_decode_StreamSink_needs_refresh_Sse(
     SseDeserializer deserializer,
   );
 
@@ -143,6 +164,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  TriggerRefreshCommand sse_decode_box_autoadd_trigger_refresh_command(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   List<String> sse_decode_list_String(SseDeserializer deserializer);
 
   @protected
@@ -155,6 +181,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   LoggedIn sse_decode_logged_in(SseDeserializer deserializer);
 
   @protected
+  NeedsRefresh sse_decode_needs_refresh(SseDeserializer deserializer);
+
+  @protected
   SetTokensCommand sse_decode_set_tokens_command(SseDeserializer deserializer);
 
   @protected
@@ -162,6 +191,11 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   TodoSystemConfig sse_decode_todo_system_config(SseDeserializer deserializer);
+
+  @protected
+  TriggerRefreshCommand sse_decode_trigger_refresh_command(
+    SseDeserializer deserializer,
+  );
 
   @protected
   int sse_decode_u_8(SseDeserializer deserializer);
@@ -184,6 +218,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_StreamSink_logged_in_Sse(
     RustStreamSink<LoggedIn> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_StreamSink_needs_refresh_Sse(
+    RustStreamSink<NeedsRefresh> self,
     SseSerializer serializer,
   );
 
@@ -242,6 +282,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_trigger_refresh_command(
+    TriggerRefreshCommand self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_list_String(List<String> self, SseSerializer serializer);
 
   @protected
@@ -260,6 +306,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_logged_in(LoggedIn self, SseSerializer serializer);
 
   @protected
+  void sse_encode_needs_refresh(NeedsRefresh self, SseSerializer serializer);
+
+  @protected
   void sse_encode_set_tokens_command(
     SetTokensCommand self,
     SseSerializer serializer,
@@ -271,6 +320,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_todo_system_config(
     TodoSystemConfig self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_trigger_refresh_command(
+    TriggerRefreshCommand self,
     SseSerializer serializer,
   );
 

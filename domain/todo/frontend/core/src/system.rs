@@ -1,8 +1,10 @@
+use crate::authenticated_api::AuthenticatedApi;
 use crate::integration::domain::auth::auth_interceptor::init_interceptor;
 use crate::{
     api::lifetime::TodoSystemConfig,
     domain::{TodoClient, TodoEngine, TodoResources, TodoState},
 };
+use auth_frontend_core::integration::shared::retry::init_retry_manager;
 use once_cell::sync::Lazy;
 #[cfg(not(target_family = "wasm"))]
 use state_machine::network::RUNTIME;
@@ -40,7 +42,9 @@ fn init_client(config: TodoSystemConfig) -> anyhow::Result<TodoClient> {
     #[cfg(not(target_family = "wasm"))]
     let _guard = RUNTIME.enter();
     let interceptor = init_interceptor();
+    let retry_manager = init_retry_manager();
     let channel = create_channel(config.base_url)?;
     let client = TodoServiceClient::with_interceptor(channel, interceptor);
-    return Ok(client);
+    let proxy = AuthenticatedApi::new(client, retry_manager);
+    return Ok(proxy);
 }

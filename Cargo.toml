@@ -45,6 +45,8 @@ axum = "0.8.9"
 hyper = "1.9.0"
 reqwest ="0.13.2"
 jsonwebtoken = "10.3.0"
+tracing-wasm = "0.2.1"
+console_error_panic_hook = "0.1.7"
 
 # workspace crates
 rust-utils = { path = "domain/shared/rust_utils" }

@@ -12,6 +12,7 @@ impl Command<AuthDomain> for SetTokensCommand {
         ctx.update(|f| {
             f.access_token = Some(self.access_token.clone());
             f.refresh_token = Some(self.refresh_token.clone());
+            f.needs_refresh = false;
         });
     }
 }

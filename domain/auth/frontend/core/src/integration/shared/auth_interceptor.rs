@@ -12,8 +12,6 @@ pub struct AuthInterceptor {
 
 impl Interceptor for AuthInterceptor {
     fn call(&mut self, mut request: Request<()>) -> Result<Request<()>, Status> {
-        // .borrow() is SYNCHRONOUS and lock-free!
-        // It perfectly bridges your async engine to Tonic's sync trait.
         let state = self.state_rx.borrow();
 
         if let Some(token) = state.access_token.clone() {

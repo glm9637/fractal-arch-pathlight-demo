@@ -1,5 +1,5 @@
 use state_machine::command::Command;
-use todo_api_client::{tonic, v1::request::AddTodoEntryRequest};
+use todo_api_client::v1::request::AddTodoEntryRequest;
 
 use crate::domain::{TodoClient, TodoContext, TodoDomain};
 
@@ -28,19 +28,17 @@ impl Command<TodoDomain> for AddTodoCommand {
 }
 
 impl AddTodoCommand {
-    async fn persist_entry(&self, mut client: TodoClient) -> anyhow::Result<String> {
-        let request = tonic::Request::new(AddTodoEntryRequest {
+    async fn persist_entry(&self, client: TodoClient) -> anyhow::Result<String> {
+        let request = AddTodoEntryRequest {
             title: self.text.clone(),
             completed: false,
-        });
+        };
 
         let response = client
             .add_todo_entry(request)
             .await
             .map_err(|e| anyhow::anyhow!("gRPC Error: {}", e))?;
 
-        let entry = response.into_inner();
-
-        return Ok(entry.title);
+        return Ok(response.title);
     }
 }

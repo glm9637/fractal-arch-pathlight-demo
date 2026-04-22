@@ -9,4 +9,3 @@ create-todo-migration name:
 revert-todo-migration:
     @echo "Reverting last Todo migration..."
     sqlx migrate revert --source {{ justfile_dir() }}/domain/todo/db
-``````

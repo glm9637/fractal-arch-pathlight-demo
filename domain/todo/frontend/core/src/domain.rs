@@ -1,4 +1,7 @@
-use crate::integration::domain::auth::auth_interceptor::AuthInterceptor;
+use crate::{
+    authenticated_api::AuthenticatedApi,
+    integration::domain::auth::auth_interceptor::AuthInterceptor,
+};
 
 use state_machine::{
     context::EngineContext, domain::Domain, engine::FractalEngine, network::UniversalChannel,
@@ -16,7 +19,8 @@ pub struct TodoState {
 
 pub type TodoEngine = FractalEngine<TodoDomain>;
 pub type TodoContext = EngineContext<TodoDomain>;
-pub type TodoClient = TodoServiceClient<InterceptedService<UniversalChannel, AuthInterceptor>>;
+pub type TodoClient = AuthenticatedApi;
+pub type InnerTodoClient = TodoServiceClient<InterceptedService<UniversalChannel, AuthInterceptor>>;
 
 #[derive(Clone, Debug)]
 pub struct TodoResources {

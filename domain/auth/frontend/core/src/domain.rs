@@ -4,6 +4,7 @@ use state_machine::{context::EngineContext, domain::Domain, engine::FractalEngin
 pub struct AuthState {
     pub access_token: Option<String>,
     pub refresh_token: Option<String>,
+    pub needs_refresh: bool,
 }
 
 #[derive(Clone, Debug)]
